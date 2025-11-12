@@ -1,0 +1,12 @@
+.canvas-container {
+    /* grid-column: 2; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.canvas-container canvas {
+    width: calc(100% - 2px);
+    aspect-ratio: 1 / 1;
+    background: #e5e5e5;
+}

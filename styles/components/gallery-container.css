@@ -1,0 +1,7 @@
+/* .gallery-container {
+    grid-column: 2;
+} */
+
+.gallery-container img {
+    width: 10em;
+}
