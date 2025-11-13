@@ -31,6 +31,7 @@ function addLine() {
         alert('You can have a max of 3 lines!')
         return
     }
+    gMeme.selectedLineIdx = gMeme.lines.length
     const width = _getWidth()
     const height = _getHeight()
 
@@ -54,7 +55,8 @@ function updateMemeImg(ImgId) {
 }
 
 function updateMemeText(userTxt) {
-    gMeme.lines[0].text = userTxt
+    const currIdx = gMeme.selectedLineIdx
+    gMeme.lines[currIdx].text = userTxt
 }
 
 function getMeme() {

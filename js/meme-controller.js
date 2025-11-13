@@ -80,6 +80,7 @@ function onDownloadMeme(elLink) {
 
 function onAddLine() {
     addLine()
+    _resetTextInput()
     drawTextBoxes()
 }
 
@@ -89,4 +90,16 @@ function _getWidth() {
 
 function _getHeight() {
     return gElCanvas.height
+}
+
+function _resetTextInput() {
+    const elInput = document.querySelector('.meme-text-input')
+    const idx = gMeme.selectedLineIdx
+
+    if (idx === undefined || !gMeme.lines[idx]) {
+        elInput.value = ''
+        return
+    }
+
+    elInput.value = gMeme.lines[idx].text
 }
