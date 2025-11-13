@@ -11,20 +11,86 @@
             <header class="main-header">
                 <h1>MeMe GeNeRaToR</h1>
             </header>
-<img src="" alt="">
+            <img src="" alt="" />
             <main class="main-container grid">
                 <section class="gallery-container"></section>
                 <section class="canvas-container">
                     <canvas> </canvas>
                 </section>
-                <button onclick="onAddText()">Add Your Text header</button>
-                <section class="editor-container"></section>
+                <section class="editor-container flex">
+                    <input
+                        type="text"
+                        data-trans="add-text-here"
+                        class="meme-text-input"
+                        placeholder="Add Your Text"
+                        oninput="onAddTxt(this)"
+                    />
+
+                    <div class="line-editor">
+                        <button class="btn switch-btn">UPDOWN</button>
+                        <button class="btn add-btn">+++</button>
+                        <button class="btn remove-btn">TRASH</button>
+                    </div>
+
+                    <div class="size-align">
+                        <button class="btn decrease-size">A-</button>
+                        <button class="btn increase-size">A+</button>
+                        <button class="btn align-left">left</button>
+                        <button class="btn align-center">center</button>
+                        <button class="btn align-right">right</button>
+                    </div>
+
+                    <div class="download-container">
+                        <a
+                            class="btn btn-download"
+                            onclick="onDownloadMeme(this)"
+                            download="my-meme.jpg"
+                        >
+                            Download
+                        </a>
+                    </div>
+
+                    <form>
+                        <label for="font-type" class="visually-hidden"
+                            >Select font</label
+                        >
+                        <select name="font-type" id="font-type">
+                            <option value="" disabled>Select font</option>
+                            <option value="impact" selected>Impact</option>
+                            <option value="arial">Arial</option>
+                            <option value="comic-sans-ms">Comic Sans MS</option>
+                            <option value="times-new-roman">
+                                Times New Roman
+                            </option>
+                            <option value="verdana">Verdana</option>
+                            <option value="georgia">Georgia</option>
+                            <option value="courier-new">Courier New</option>
+                            <option value="tahoma">Tahoma</option>
+                            <option value="lucida-sans">Lucida Sans</option>
+                            <option value="palatino-linotype">
+                                Palatino Linotype
+                            </option>
+                        </select>
+
+                        <input
+                            type="color"
+                            class="btn stroke-color"
+                            oninput="onUpdateStrokeColor()"
+                        />
+                        <input
+                            type="color"
+                            class="btn fill-color"
+                            oninput="onUpdateFillColor(this)"
+                        />
+                    </form>
+                </section>
             </main>
         </div>
 
         <script src="js/main-controller.js"></script>
         <script src="js/gallery-controller.js"></script>
         <script src="js/gallery-service.js"></script>
+        <script src="js/editor-controller.js"></script>
         <script src="js/meme-controller.js"></script>
         <script src="js/meme-service.js"></script>
     </body>

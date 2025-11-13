@@ -34,3 +34,11 @@ function updateMemeText(userTxt) {
 function getMeme() {
     return gMeme
 }
+
+function updateStrokeColor(strokeColor) {
+    gMeme.lines[0].outline = strokeColor
+}
+
+function updateFillColor(fillColor) {
+    gMeme.lines[0].color = fillColor
+}

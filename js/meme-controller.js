@@ -14,13 +14,6 @@ function renderMeme() {
     }
 }
 
-function onAddText() {
-    const userTxt = prompt('Enter your text here')
-    updateMemeText(userTxt)
-    renderMeme()
-    console.log('gMeme:', gMeme)
-}
-
 function drawTextBox(y = 50) {
     const meme = getMeme()
     const { text, size, color, outline, fontType, align } = meme.lines[0]
@@ -39,17 +32,27 @@ function drawTextBox(y = 50) {
     const boxX = x - boxWidth / 2
     const boxY = y - size - padding
 
-    // Draw rectangle behind text
-    gCtx.fillStyle = 'rgba(0,0,0,0.5)'
+    // Draw rectangle background
+    gCtx.fillStyle = 'rgba(0,0,0,0.3)'
     gCtx.fillRect(boxX, boxY, boxWidth, boxHeight)
 
     // Draw rectangle outline
-    gCtx.strokeStyle = outline || 'black'
+    gCtx.strokeStyle = 'black'
     gCtx.lineWidth = 2
     gCtx.strokeRect(boxX, boxY, boxWidth, boxHeight)
 
-    // Draw the text
-    gCtx.fillStyle = color || 'white'
+    // Draw the text fill
+    gCtx.fillStyle = color
     gCtx.fillText(text, x, y)
+
+    // Draw the text outline
+    gCtx.strokeStyle = outline
+    gCtx.lineWidth = 2 // text outline thickness
     gCtx.strokeText(text, x, y)
+}
+
+function onDownloadMeme(elLink) {
+    const dataUrl = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = dataUrl
+    elLink.download = 'my-meme.jpeg'
 }
