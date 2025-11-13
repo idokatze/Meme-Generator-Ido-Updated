@@ -28,13 +28,23 @@
 
                     <div class="line-editor">
                         <button class="btn switch-btn">UPDOWN</button>
-                        <button class="btn add-btn">+++</button>
+                        <button class="btn add-btn" onclick="onAddLine()">+++</button>
                         <button class="btn remove-btn">TRASH</button>
                     </div>
 
                     <div class="size-align">
-                        <button class="btn decrease-size">A-</button>
-                        <button class="btn increase-size">A+</button>
+                        <button
+                            class="btn decrease-size"
+                            onclick="onDecreaseSize()"
+                        >
+                            A-
+                        </button>
+                        <button
+                            class="btn increase-size"
+                            onclick="onIncreaseSize()"
+                        >
+                            A+
+                        </button>
                         <button class="btn align-left">left</button>
                         <button class="btn align-center">center</button>
                         <button class="btn align-right">right</button>

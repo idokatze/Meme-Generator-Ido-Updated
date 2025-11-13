@@ -18,3 +18,13 @@ function onUpdateFillColor(ev) {
     updateFillColor(elFillColor)
     renderMeme()
 }
+
+function onDecreaseSize() {
+    changeSize(-1)
+    renderMeme()
+}
+
+function onIncreaseSize() {
+    changeSize(1)
+    renderMeme()
+}
