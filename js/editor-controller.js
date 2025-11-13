@@ -28,3 +28,9 @@ function onIncreaseSize() {
     changeSize(1)
     renderMeme()
 }
+
+function onSwitchFocus() {
+    switchFocus()
+    _resetTextInput()
+    renderMeme()
+}

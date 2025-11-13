@@ -80,3 +80,14 @@ function changeSize(delta) {
         line.size = newSize
     }
 }
+
+function switchFocus() {
+    let meme = getMeme()
+    if (meme.lines.length <= 1) return
+
+    if (meme.selectedLineIdx === meme.lines.length - 1) {
+        meme.selectedLineIdx = 0
+    } else {
+        meme.selectedLineIdx++
+    }
+}
