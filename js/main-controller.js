@@ -2,6 +2,8 @@
 
 let gElCanvas
 let gCtx
+let gIsDraging
+let gStartPos
 
 var gMeme = {
     selectedImgId: 5,
@@ -25,7 +27,8 @@ var gMeme = {
 function onInit() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
-
+    gIsDraging = false
+    gStartPos = { x: 0, y: 0 }
     resizeCanvas()
     renderGallery()
     preloadMemeImage()

@@ -15,7 +15,12 @@
             <main class="main-container grid">
                 <section class="gallery-container"></section>
                 <section class="canvas-container">
-                    <canvas onmousedown="onDown(event)"> </canvas>
+                    <canvas
+                        onmousedown="onDown(event)"
+                        onmouseup="onUp()"
+                        onmousemove="onMove(event)"
+                    >
+                    </canvas>
                 </section>
                 <section class="editor-container flex">
                     <input

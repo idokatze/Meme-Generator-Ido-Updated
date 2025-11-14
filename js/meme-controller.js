@@ -138,36 +138,55 @@ function getEvPos(ev) {
 function onDown(ev) {
     // Get the ev pos from mouse or touch
     const pos = getEvPos(ev)
-    const linesPos = getLineLocations()
-    console.log('pos', pos)
-
+    calcLineLocations()
     const meme = getMeme()
 
-    linesPos.forEach((line) => {
-        if (
-            pos.x >= line.x &&
-            pos.x <= line.x + line.width &&
-            pos.y >= line.y &&
-            pos.y <= line.y + line.height
-        ) {
-            console.log('hit')
-        }
+    const hitLineIdx = meme.lines.findIndex((line) => {
+        return (
+            pos.x >= line.location.x &&
+            pos.x <= line.location.x + line.location.width &&
+            pos.y >= line.location.y &&
+            pos.y <= line.location.y + line.location.height
+        )
     })
 
-    // if (!isCircleClicked(pos)) return
-    // console.log('onDown')
+    if (hitLineIdx === -1) return
 
-    // setCircleDrag(true)
-    // //Save the pos we start from
-    // gStartPos = pos
-    // document.body.style.cursor = 'grabbing'
+    meme.selectedLineIdx = hitLineIdx
+    gIsDraging = true
+    gStartPos = pos
+    document.body.style.cursor = 'grabbing'
 }
 
-function getLineLocations() {
-    const meme = getMeme()
-    const lines = meme.lines
+function onMove(ev) {
+    console.log('hi')
 
-    const locations = lines.map((line) => {
+    if (!gIsDraging) return
+
+    const pos = getEvPos(ev)
+    const deltaX = pos.x - gStartPos.x
+    const deltaY = pos.y - gStartPos.y
+
+    const meme = getMeme()
+    const line = meme.lines[meme.selectedLineIdx]
+    line.x += deltaX
+    line.y += deltaY
+
+    gStartPos = pos
+    calcLineLocations()
+    renderMeme()
+}
+
+function onUp(ev) {
+    gIsDraging = false
+    document.body.style.cursor = 'default'
+    renderMeme()
+}
+
+function calcLineLocations() {
+    const meme = getMeme()
+
+    meme.lines.forEach((line) => {
         gCtx.font = `${line.size}px ${line.fontType}`
         gCtx.textAlign = line.align
         gCtx.textBaseline = 'bottom' // if this is how you draw the text
@@ -180,8 +199,11 @@ function getLineLocations() {
         console.log('textWidth:', textWidth)
         const yCoord = line.y - line.size
 
-        return { x: xCoord, y: yCoord, width: textWidth, height: line.size }
+        line.location = {
+            x: xCoord,
+            y: yCoord,
+            width: textWidth,
+            height: line.size,
+        }
     })
-
-    return locations
 }
