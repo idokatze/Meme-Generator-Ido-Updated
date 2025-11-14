@@ -10,7 +10,7 @@ function renderCanvas() {
 
 function preloadMemeImage() {
     const meme = getMeme()
-    gMemeImg.src = `/img/meme-imgs (square)/${meme.selectedImgId}.jpg`
+    gMemeImg.src = `/img/square-imgs/${meme.selectedImgId}.jpg`
     gMemeImg.onload = () => renderMeme()
 }
 

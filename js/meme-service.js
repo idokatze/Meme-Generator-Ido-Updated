@@ -47,7 +47,7 @@ function addLine() {
 function updateMemeImg(imgId) {
     gMeme.selectedImgId = imgId
     gMemeImg = new Image()
-    gMemeImg.src = `/img/meme-imgs (square)/${imgId}.jpg`
+    gMemeImg.src = `/img/square-imgs/${imgId}.jpg`
     gMemeImg.onload = () => renderMeme()
 }
 
