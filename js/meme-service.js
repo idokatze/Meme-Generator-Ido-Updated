@@ -1,59 +1,6 @@
 'use strict'
 
-// The current meme being edited
-// var gMeme = {
-//     selectedImgId: 5,
-//     selectedLineIdx: 0,
-//     lines: [
-//         {
-//             text: 'Add Your Text',
-//             size: 20,
-//             color: 'red',
-//             outline: 'black',
-//             fontType: 'Impact',
-//             align: 'center',
 
-//             // Relative positions (ratios of canvas width/height)
-//             xRatio: 0.5,
-//             yRatio: 0.25,
-
-//             // Absolute positions (pixels)
-//             x: 100,
-//             y: 50,
-
-//             // Bounding box (pixels) — optional, for hover/click detection
-//             width: 0, // to be calculated dynamically
-//             height: 0, // to be calculated dynamically
-//             padding: 10, // optional padding around text for box
-//         },
-//     ],
-// }
-
-var gMeme = {
-    selectedImgId: 5,
-    selectedLineIdx: 0,
-    lines: [
-        {
-            // Base info
-            text: 'Add Your Text', 
-            sizeRatio: 0.05, 
-            color: 'red', 
-            outline: 'black',
-            fontType: 'Impact', 
-            align: 'center', 
-
-            // Relative positions for dynamic canvas
-            xRatio: 0.5,
-            yRatio: 0.25,
-
-            // Relative text box dimensions
-            widthRatio: 0.4, 
-            heightRatio: 0.1, 
-
-            paddingRatio: 0.02,
-        },
-    ],
-}
 
 // Keyword search count map
 var gKeywordSearchCountMap = {
@@ -68,25 +15,31 @@ function addLine() {
         alert('You can have a max of 3 lines!')
         return
     }
-    const width = _getCanvasWidth()
-    const height = _getCanvasHeight()
+
+    const width = gElCanvas.width
+    const height = gElCanvas.height
 
     const defaultPositions = [
-        { xRatio: 0.5, yRatio: 0.25 },
-        { xRatio: 0.75, yRatio: 0.75 },
-        { xRatio: 0.25, yRatio: 0.75 },
+        { x: width / 2, y: height * 0.25 },
+        { x: width * 0.75, y: height * 0.75 },
+        { x: width * 0.25, y: height * 0.75 },
     ]
 
     const idx = gMeme.lines.length
     gMeme.selectedLineIdx = idx
     const pos = defaultPositions[idx]
-    const newLine = { ...gMeme.lines[0] }
 
-    newLine.xRatio = pos.xRatio
-    newLine.yRatio = pos.yRatio
-    newLine.x = pos.xRatio * width
-    newLine.y = pos.yRatio * height
-    newLine.text = 'Add Your Text'
+    const newLine = {
+        text: 'Add Your Text',
+        fontType: 'Impact',
+        size: 30, // pixel size
+        color: 'red',
+        outline: 'black',
+        align: 'center',
+        x: pos.x,
+        y: pos.y,
+        padding: 10,
+    }
 
     gMeme.lines.push(newLine)
 }

@@ -15,7 +15,7 @@
             <main class="main-container grid">
                 <section class="gallery-container"></section>
                 <section class="canvas-container">
-                    <canvas> </canvas>
+                    <canvas onmousedown="onDown(event)"> </canvas>
                 </section>
                 <section class="editor-container flex">
                     <input
@@ -27,8 +27,15 @@
                     />
 
                     <div class="line-editor">
-                        <button class="btn switch-btn" onclick="onSwitchFocus()">UPDOWN</button>
-                        <button class="btn add-btn" onclick="onAddLine()">+++</button>
+                        <button
+                            class="btn switch-btn"
+                            onclick="onSwitchFocus()"
+                        >
+                            UPDOWN
+                        </button>
+                        <button class="btn add-btn" onclick="onAddLine()">
+                            +++
+                        </button>
                         <button class="btn remove-btn">TRASH</button>
                     </div>
 

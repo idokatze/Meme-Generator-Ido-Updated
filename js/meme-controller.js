@@ -1,6 +1,6 @@
 'use strict'
 
-let gMemeImg = new Image() // global image
+let gMemeImg = new Image()
 
 function renderCanvas() {
     gElCanvas = document.querySelector('canvas')
@@ -11,8 +11,6 @@ function renderCanvas() {
 function preloadMemeImage() {
     const meme = getMeme()
     gMemeImg.src = `/img/meme-imgs (square)/${meme.selectedImgId}.jpg`
-
-    // Draw as soon as image is loaded
     gMemeImg.onload = () => renderMeme()
 }
 
@@ -20,74 +18,50 @@ function renderMeme() {
     renderCanvas()
     if (!gElCanvas || !gCtx || !gMemeImg.complete) return
 
-    // Clear canvas first
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
-
-    // Draw the image
     gCtx.drawImage(gMemeImg, 0, 0, gElCanvas.width, gElCanvas.height)
-
-    // Draw all text lines
     drawTextBoxes()
 }
 
-function drawTextBoxes(padding = 10) {
+function drawTextBoxes() {
     if (!gCtx || !gMeme) return
-    updateResponsivePositions()
-    const canvasWidth = _getCanvasWidth()
-    const canvasHeight = _getCanvasHeight()
-    const meme = getMeme()
-    const selectedIdx = meme.selectedLineIdx
+    const selectedIdx = gMeme.selectedLineIdx
 
-    meme.lines.forEach((line, idx) => {
-        const {
-            text,
-            sizeRatio,
-            color,
-            outline,
-            fontType,
-            align,
-            xRatio,
-            yRatio,
-        } = line
-        const x = xRatio * canvasWidth
-        const y = yRatio * canvasHeight
-        const textSize = line.sizeRatio * canvasHeight
+    gMeme.lines.forEach((line, idx) => {
+        const { text, size, color, outline, fontType, align, x, y, padding } =
+            line
 
         gCtx.save()
-        gCtx.font = `${textSize}px ${fontType}`
+        gCtx.font = `${size}px ${fontType}`
         gCtx.textAlign = align
         gCtx.textBaseline = 'bottom'
 
-        // Measure text width
         const textWidth = gCtx.measureText(text).width
         const boxWidth = textWidth + padding * 2
-        const boxHeight = textSize + padding * 2
+        const boxHeight = size + padding * 2
 
-        console.log('sizeRatio:', sizeRatio)
-        // Compute box position
+        // Compute box top-left
         let boxX = x
         if (align === 'center') boxX = x - boxWidth / 2
         else if (align === 'right') boxX = x - boxWidth
-        const boxY = y - textSize - padding
+        const boxY = y - size - padding
 
-        // Highlight selected line with an outline box
+        // Outline for selected line
         if (idx === selectedIdx) {
             gCtx.strokeStyle = 'yellow'
             gCtx.lineWidth = 2
             gCtx.strokeRect(boxX, boxY, boxWidth, boxHeight)
         }
 
-        // Draw text fill
+        // Draw text
         gCtx.fillStyle = color
         gCtx.fillText(text, x, y)
 
-        // Draw text outline
         gCtx.strokeStyle = outline
         gCtx.lineWidth = 2
         gCtx.strokeText(text, x, y)
 
         gCtx.restore()
-        console.log('gMeme.selectedLineIdx:', gMeme.selectedLineIdx)
     })
 }
 
@@ -139,13 +113,75 @@ function updateResponsivePositions() {
     })
 }
 
-function getLinesPos() {
-    const linesPos = []
+function getEvPos(ev) {
+    const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
+
+    let pos = {
+        x: ev.offsetX,
+        y: ev.offsetY,
+    }
+
+    if (TOUCH_EVS.includes(ev.type)) {
+        // Prevent triggering the mouse ev
+        ev.preventDefault()
+        // Gets the first touch point
+        ev = ev.changedTouches[0]
+        // Calc the right pos according to the touch screen
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+        }
+    }
+    return pos
+}
+
+function onDown(ev) {
+    // Get the ev pos from mouse or touch
+    const pos = getEvPos(ev)
+    const linesPos = getLineLocations()
+    console.log('pos', pos)
+
     const meme = getMeme()
 
-    meme.lines.forEach((line) => {
-        linesPos.push({ x: currLineX, y: currLineY })
+    linesPos.forEach((line) => {
+        if (
+            pos.x >= line.x &&
+            pos.x <= line.x + line.width &&
+            pos.y >= line.y &&
+            pos.y <= line.y + line.height
+        ) {
+            console.log('hit')
+        }
     })
 
-    return linesPos
+    // if (!isCircleClicked(pos)) return
+    // console.log('onDown')
+
+    // setCircleDrag(true)
+    // //Save the pos we start from
+    // gStartPos = pos
+    // document.body.style.cursor = 'grabbing'
+}
+
+function getLineLocations() {
+    const meme = getMeme()
+    const lines = meme.lines
+
+    const locations = lines.map((line) => {
+        gCtx.font = `${line.size}px ${line.fontType}`
+        gCtx.textAlign = line.align
+        gCtx.textBaseline = 'bottom' // if this is how you draw the text
+        const textWidth = gCtx.measureText(line.text).width
+        console.log('line.x:', line.x)
+
+        let xCoord = line.x
+        if (line.align === 'center') xCoord = line.x - textWidth / 2
+        else if (line.align === 'right') xCoord = line.x - textWidth
+        console.log('textWidth:', textWidth)
+        const yCoord = line.y - line.size
+
+        return { x: xCoord, y: yCoord, width: textWidth, height: line.size }
+    })
+
+    return locations
 }
