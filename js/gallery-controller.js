@@ -1,7 +1,6 @@
 'use strict'
 
 function renderGallery() {
-    console.log('hi')
     const elGallery = document.querySelector('.gallery-container')
 
     let strHTMLs = gImgs
