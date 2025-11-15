@@ -1,16 +1,16 @@
 /* SETUP */
 
 /* BASICS */
-@import url('/styles/basics/base.css');
-@import url('/styles/basics/layout.css');
-@import url('/styles/basics/helpers.css');
+@import url('../styles/basics/base.css');
+@import url('../styles/basics/layout.css');
+@import url('../styles/basics/helpers.css');
 
 /* COMPONENTS */
-@import url('/styles/components/main-header.css');
-@import url('/styles/components/main-container.css');
-@import url('/styles/components/gallery-container.css');
-@import url('/styles/components/canvas.css');
-@import url('/styles/components/nav.css');
-@import url('/styles/components/editor.css');
+@import url('../styles/components/main-header.css');
+@import url('../styles/components/main-container.css');
+@import url('../styles/components/gallery-container.css');
+@import url('../styles/components/canvas.css');
+@import url('../styles/components/nav.css');
+@import url('../styles/components/editor.css');
 
 /* MQ */
