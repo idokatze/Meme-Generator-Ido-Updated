@@ -6,7 +6,7 @@ function renderGallery() {
     let strHTMLs = gImgs
         .map(
             (img) =>
-                `<img src="${img.url}" alt="gallery image" onclick="onclickedImg(${img.id})">`
+                `<img src="${img.url}" alt="gallery image" onclick="setMode('editor', ${img.id})">`
         )
         .join('')
 

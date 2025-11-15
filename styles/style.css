@@ -10,5 +10,7 @@
 @import url('/styles/components/main-container.css');
 @import url('/styles/components/gallery-container.css');
 @import url('/styles/components/canvas.css');
+@import url('/styles/components/nav.css');
+@import url('/styles/components/editor.css');
 
 /* MQ */

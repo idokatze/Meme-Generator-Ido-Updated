@@ -1,4 +1,17 @@
 .main-container {
     grid-column: 2;
     grid-template-columns: 1fr;
+    grid-template-rows: 2fr 1fr;
+    gap: 1em;
+}
+
+.canvas-container {
+    grid-row: 1;
+}
+
+.editor-container {
+    grid-row: 2;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }

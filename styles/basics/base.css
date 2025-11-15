@@ -2,6 +2,18 @@
     box-sizing: border-box;
 }
 
+:root {
+    --bg: #f9fafb;
+
+    --main: #3b82f6;
+    --main-hover: #2563eb;
+
+    --secondary: #10b981;
+    --secondary-hover: #059669;
+
+    --text: #111827;
+}
+
 /* html {
     font-family: lato-regular, monospace;
 }

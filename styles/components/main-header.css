@@ -1,5 +1,8 @@
 .main-header {
     grid-column: 1 / -1;
-    justify-content: center;
+    /* justify-content: center; */
 }
 
+.main-header h1 {
+    margin: 1em 1em;
+}
