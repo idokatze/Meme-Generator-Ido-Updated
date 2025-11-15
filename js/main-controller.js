@@ -25,19 +25,7 @@ var gMeme = {
 }
 
 function onInit() {
-    gElCanvas = document.querySelector('canvas')
-    gCtx = gElCanvas.getContext('2d')
-    gIsDraging = false
-    gStartPos = { x: 0, y: 0 }
-    resizeCanvas()
     renderGallery()
-    preloadMemeImage()
-    // addCanvasEventListeners();
-
-    window.addEventListener('resize', () => {
-        resizeCanvas()
-        renderMeme()
-    })
 }
 
 function resizeCanvas() {

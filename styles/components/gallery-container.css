@@ -2,6 +2,12 @@
     grid-column: 2;
 } */
 
+.gallery-container {
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+}
+
 .gallery-container img {
     width: 10em;
 }

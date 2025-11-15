@@ -8,21 +8,23 @@
     </head>
     <body onload="onInit()">
         <div class="main-layout grid">
-            <header class="main-header">
+            <header class="main-header flex">
                 <h1>MeMe GeNeRaToR</h1>
             </header>
             <img src="" alt="" />
             <main class="main-container grid">
-                <section class="gallery-container"></section>
+                <section class="gallery-container flex"></section>
                 <section class="canvas-container">
                     <canvas
+                        class="canvas hidden"
+                        id="my-canvas"
                         onmousedown="onDown(event)"
                         onmouseup="onUp()"
                         onmousemove="onMove(event)"
                     >
                     </canvas>
                 </section>
-                <section class="editor-container flex">
+                <section class="editor-container flex hidden">
                     <input
                         type="text"
                         data-trans="add-text-here"

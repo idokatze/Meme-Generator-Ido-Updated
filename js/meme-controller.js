@@ -6,16 +6,16 @@ function renderCanvas() {
     gElCanvas = document.querySelector('canvas')
     if (!gElCanvas) return
     gCtx = gElCanvas.getContext('2d')
-}
+    resizeCanvas()
 
-function preloadMemeImage() {
-    const meme = getMeme()
-    gMemeImg.src = `img/square-imgs/${meme.selectedImgId}.jpg`
-    gMemeImg.onload = () => renderMeme()
+    // Attach resize listener only once
+    window.addEventListener('resize', () => {
+        resizeCanvas()
+        renderMeme()
+    })
 }
 
 function renderMeme() {
-    renderCanvas()
     if (!gElCanvas || !gCtx || !gMemeImg.complete) return
 
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)

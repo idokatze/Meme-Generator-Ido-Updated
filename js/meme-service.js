@@ -1,7 +1,5 @@
 'use strict'
 
-
-
 // Keyword search count map
 var gKeywordSearchCountMap = {
     funny: 12,
@@ -44,11 +42,18 @@ function addLine() {
     gMeme.lines.push(newLine)
 }
 
-function updateMemeImg(imgId) {
-    gMeme.selectedImgId = imgId
+function setMemeImage(imgId) {
+    // Update meme state if a new id is passed
+    console.log('imgId:', imgId)
+    if (imgId) gMeme.selectedImgId = imgId
+
+    const meme = getMeme()
     gMemeImg = new Image()
-    gMemeImg.src = `img/square-imgs/${imgId}.jpg`
-    gMemeImg.onload = () => renderMeme()
+    gMemeImg.src = `img/square-imgs/${meme.selectedImgId}.jpg`
+
+    gMemeImg.onload = () => {
+        renderMeme()
+    }
 }
 
 function updateMemeText(userTxt) {
