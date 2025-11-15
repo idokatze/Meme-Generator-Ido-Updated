@@ -14,3 +14,5 @@
 @import url('../styles/components/editor.css');
 
 /* MQ */
+@import url('../styles/setup/mq.css');
+

@@ -5,6 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>MeMe GeNeRaToR</title>
         <link rel="stylesheet" href="styles/style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        />
     </head>
     <body onload="onInit()">
         <div class="main-layout grid">
@@ -52,30 +56,63 @@
                             class="btn switch-btn"
                             onclick="onSwitchFocus()"
                         >
-                            UPDOWN
+                            Change Line
                         </button>
                         <button class="btn add-btn" onclick="onAddLine()">
                             +++
                         </button>
-                        <button class="btn remove-btn">TRASH</button>
+                        <button class="btn remove-btn" onclick="onRemoveLine()">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+
+                        <div class="download-container">
+                            <a
+                                class="btn btn-download"
+                                onclick="onDownloadMeme(this)"
+                                download="my-meme.jpg"
+                            >
+                                <i class="fa-solid fa-download"></i>
+                            </a>
+                        </div>
                     </div>
 
-                    <div class="size-align">
-                        <button
-                            class="btn decrease-size"
-                            onclick="onDecreaseSize()"
-                        >
-                            A-
-                        </button>
-                        <button
-                            class="btn increase-size"
-                            onclick="onIncreaseSize()"
-                        >
-                            A+
-                        </button>
-                        <button class="btn align-left">left</button>
-                        <button class="btn align-center">center</button>
-                        <button class="btn align-right">right</button>
+                    <div class="font-size">
+                        <section class="font-size">
+                            <button
+                                class="btn decrease-size"
+                                onclick="onDecreaseSize()"
+                            >
+                                A-
+                            </button>
+                            <button
+                                class="btn increase-size"
+                                onclick="onIncreaseSize()"
+                            >
+                                A+
+                            </button>
+                        </section>
+                    </div>
+                    <div class="align">
+                        <section class="text-align">
+                            <button
+                                class="btn align-left"
+                                onclick="onChangeAlign('left')"
+                            >
+                                <i class="fa-solid fa-align-left"></i>
+                            </button>
+                            <button
+                                class="btn align-center"
+                                onclick="onChangeAlign('center')"
+                            >
+                                <i class="fa-solid fa-align-center"></i>
+                            </button>
+                            <button
+                                class="btn align-right"
+                                onclick="onChangeAlign('right')"
+                            >
+                                <i class="fa-solid fa-align-right"></i>
+                            </button>
+                        </section>
                     </div>
 
                     <div class="download-container">
@@ -89,37 +126,54 @@
                     </div>
 
                     <form>
-                        <label for="font-type" class="visually-hidden"
-                            >Select font</label
-                        >
-                        <select name="font-type" id="font-type">
-                            <option value="" disabled>Select font</option>
-                            <option value="impact" selected>Impact</option>
-                            <option value="arial">Arial</option>
-                            <option value="comic-sans-ms">Comic Sans MS</option>
-                            <option value="times-new-roman">
-                                Times New Roman
-                            </option>
-                            <option value="verdana">Verdana</option>
-                            <option value="georgia">Georgia</option>
-                            <option value="courier-new">Courier New</option>
-                            <option value="tahoma">Tahoma</option>
-                            <option value="lucida-sans">Lucida Sans</option>
-                            <option value="palatino-linotype">
-                                Palatino Linotype
-                            </option>
-                        </select>
-
-                        <input
-                            type="color"
-                            class="btn stroke-color"
-                            oninput="onUpdateStrokeColor()"
-                        />
-                        <input
-                            type="color"
-                            class="btn fill-color"
-                            oninput="onUpdateFillColor(this)"
-                        />
+                        <div class="font-pick">
+                            <label for="font-type" class="visually-hidden"
+                                >Select font</label
+                            >
+                            <select
+                                name="font-type"
+                                id="font-type"
+                                onchange="onChangeFont(this)"
+                            >
+                                <option value="" disabled>Select font</option>
+                                <option value="impact" selected>Impact</option>
+                                <option value="arial">Arial</option>
+                                <option value="verdana">Verdana</option>
+                                <option value="tahoma">Tahoma</option>
+                                <option value="times-new-roman">
+                                    Times New Roman
+                                </option>
+                                <option value="georgia">Georgia</option>
+                                <option value="courier-new">Courier New</option>
+                                <option value="trebuchet-ms">
+                                    Trebuchet MS
+                                </option>
+                            </select>
+                        </div>
+                        <div class="color-section">
+                            <div class="stroke-container">
+                                <label for="stroke-color"
+                                    ><i class="fa-solid fa-paintbrush"></i
+                                ></label>
+                                <input
+                                    id="stroke-color"
+                                    type="color"
+                                    class="btn stroke-color"
+                                    oninput="onUpdateStrokeColor()"
+                                />
+                            </div>
+                            <div class="fill-container">
+                                <label for="color"
+                                    ><i class="fa-solid fa-palette"></i
+                                ></label>
+                                <input
+                                    id="fill-color"
+                                    type="color"
+                                    class="btn fill-color"
+                                    oninput="onUpdateFillColor(this)"
+                                />
+                            </div>
+                        </div>
                     </form>
                 </section>
             </main>

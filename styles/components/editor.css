@@ -6,3 +6,33 @@
 
     border-color: var(--main);
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.color-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.color-section > * {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
+.download-container {
+    display: inline;
+}

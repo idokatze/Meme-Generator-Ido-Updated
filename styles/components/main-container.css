@@ -1,17 +1,33 @@
 .main-container {
     grid-column: 2;
+    display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
     gap: 1em;
+    background-color: #1e1e2f;
+    border: 2px solid #444;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .canvas-container {
     grid-row: 1;
+    background-color: #2a2a3d;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .editor-container {
     grid-row: 2;
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    background-color: #f0f0f5;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }

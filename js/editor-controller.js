@@ -34,3 +34,20 @@ function onSwitchFocus() {
     _resetTextInput()
     renderMeme()
 }
+
+function onChangeAlign(mode) {
+    changeAlign(mode)
+    renderMeme()
+}
+
+function onRemoveLine() {
+    removeLine()
+    renderMeme()
+}
+
+function onChangeFont(selectElement) {
+    const newFont = selectElement.value
+    console.log('newFont:', newFont)
+    changeFont(newFont)
+    renderMeme()
+}

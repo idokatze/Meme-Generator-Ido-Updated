@@ -38,10 +38,12 @@ function setMode(mode, imgId = null) {
     const elGallery = document.querySelector('.gallery-container')
     const elCanvas = document.querySelector('canvas')
     const elEditor = document.querySelector('.editor-container')
+    const mainContainer = document.querySelector('.main-container')
 
     elGallery.classList.add('hidden')
     elCanvas.classList.add('hidden')
     elEditor.classList.add('hidden')
+    mainContainer.classList.add('hidden')
 
     switch (mode) {
         case 'gallery':
@@ -49,13 +51,12 @@ function setMode(mode, imgId = null) {
             break
 
         case 'editor':
+            mainContainer.classList.remove('hidden')
             elCanvas.classList.remove('hidden')
             elEditor.classList.remove('hidden')
             renderCanvas()
             if (imgId) setMemeImage(imgId)
             renderMeme()
             break
-
-        // Todo - more modes
     }
 }

@@ -101,3 +101,30 @@ function switchFocus() {
         meme.selectedLineIdx++
     }
 }
+
+function changeAlign(mode) {
+    const meme = getMeme()
+    const idx = meme.selectedLineIdx
+
+    meme.lines[idx].align = mode
+}
+
+function removeLine() {
+    const meme = getMeme()
+    const idx = meme.selectedLineIdx
+
+    if (meme.lines.length === 0) return
+    if (meme.lines.length === 1) {
+        alert('You must have at least one line')
+        return
+    }
+
+    meme.lines.splice(idx, 1)
+    meme.selectedLineIdx = 0
+}
+
+function changeFont(newFont) {
+    const meme = getMeme()
+    const idx = meme.selectedLineIdx
+    meme.lines[idx].fontType = newFont
+}

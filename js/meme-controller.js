@@ -15,15 +15,15 @@ function renderCanvas() {
     })
 }
 
-function renderMeme() {
+function renderMeme(isExport = false) {
     if (!gElCanvas || !gCtx || !gMemeImg.complete) return
 
     gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
     gCtx.drawImage(gMemeImg, 0, 0, gElCanvas.width, gElCanvas.height)
-    drawTextBoxes()
+    drawTextBoxes(isExport)
 }
 
-function drawTextBoxes() {
+function drawTextBoxes(isExport) {
     if (!gCtx || !gMeme) return
     const selectedIdx = gMeme.selectedLineIdx
 
@@ -40,20 +40,18 @@ function drawTextBoxes() {
         const boxWidth = textWidth + padding * 2
         const boxHeight = size + padding * 2
 
-        // Compute box top-left
         let boxX = x
         if (align === 'center') boxX = x - boxWidth / 2
         else if (align === 'right') boxX = x - boxWidth
         const boxY = y - size - padding
 
-        // Outline for selected line
-        if (idx === selectedIdx) {
+        // Outline only if editing, not exporting
+        if (!isExport && idx === selectedIdx) {
             gCtx.strokeStyle = 'yellow'
             gCtx.lineWidth = 2
             gCtx.strokeRect(boxX, boxY, boxWidth, boxHeight)
         }
 
-        // Draw text
         gCtx.fillStyle = color
         gCtx.fillText(text, x, y)
 
@@ -66,9 +64,11 @@ function drawTextBoxes() {
 }
 
 function onDownloadMeme(elLink) {
+    renderMeme(true)
     const dataUrl = gElCanvas.toDataURL('image/jpeg')
     elLink.href = dataUrl
     elLink.download = 'my-meme.jpeg'
+    renderMeme()
 }
 
 function onAddLine() {
