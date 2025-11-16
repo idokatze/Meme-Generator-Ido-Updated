@@ -50,15 +50,15 @@ i {
     text-decoration: none;
     color: #fff;
     line-height: 1;
-    background-color: #4a90e2; /* soft blue */
+    background-color: var(--tertiary);
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .btn:hover {
-    background-color: #357ab8; /* darker blue on hover */
+    background-color: var(--tertiary-hover);
 }
 
 .btn:active {
     transform: translateY(1px);
-    background-color: #2d5f91; /* pressed state */
+    background-color: var(--secondary-hover)91;
 }

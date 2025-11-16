@@ -1,7 +1,6 @@
 'use strict'
 
 function onAddTxt(elInput) {
-    console.log('elInput:', elInput)
     const text = elInput.value
     updateMemeText(text)
     renderMeme()
@@ -49,7 +48,6 @@ function onRemoveLine() {
 
 function onChangeFont(selectElement) {
     const newFont = selectElement.value
-    console.log('newFont:', newFont)
     changeFont(newFont)
     renderMeme()
 }

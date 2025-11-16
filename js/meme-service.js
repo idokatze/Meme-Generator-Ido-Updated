@@ -84,6 +84,8 @@ function changeSize(delta) {
 
     if (newSize >= 5 && newSize <= 40) {
         line.size = newSize
+        updateLineMetrics(line, gCtx)
+        renderMeme()
     }
 }
 
@@ -137,6 +139,21 @@ function removeLine() {
 
 function changeFont(newFont) {
     const meme = getMeme()
-    const idx = meme.selectedLineIdx
-    meme.lines[idx].fontType = newFont
+    const line = meme.lines[meme.selectedLineIdx]
+    line.fontType = newFont
+
+    updateLineMetrics(line, gCtx)
+}
+
+function updateLineMetrics(line, ctx) {
+    ctx.font = `${line.size}px ${line.fontType}`
+    ctx.textBaseline = 'bottom'
+
+    const textWidth = ctx.measureText(line.text).width
+
+    line.boxWidth = textWidth + line.padding * 2
+    line.boxHeight = line.size + line.padding * 2
+
+    line.boxX = line.x - line.padding
+    line.boxY = line.y - line.size - line.padding
 }

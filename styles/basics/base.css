@@ -3,16 +3,20 @@
 }
 
 :root {
-    --bg: #f9fafb;
+    --bg: #FFF8E7;
 
-    --main: #3b82f6;
-    --main-hover: #2563eb;
+    --main: #375E97;
+    --main-hover: #2C4A78;
 
-    --secondary: #10b981;
-    --secondary-hover: #059669;
+    --secondary: #FB6542;
+    --secondary-hover: #E04A2A;
+
+    --tertiary: #FFBB00;
+    --tertiary-hover: #E6A800;
 
     --text: #111827;
 }
+
 
 a {
     padding: 0 0;

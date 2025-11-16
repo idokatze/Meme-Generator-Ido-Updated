@@ -7,9 +7,18 @@
 }
 
 body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
     background: var(--bg);
     color: var(--text);
 
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
         'Helvetica Neue', Arial, sans-serif;
+
+    border: 12px solid var(--tertiary);
+    margin: 1em;
+    padding-bottom: 2em;
+    border-radius: 20px;
 }

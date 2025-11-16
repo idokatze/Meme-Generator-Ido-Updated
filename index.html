@@ -12,9 +12,9 @@
     </head>
     <body onload="onInit()">
         <div class="main-layout grid">
-            <header class="main-header flex space-between">
+            <header class="main-header">
                 <h1>Memes</h1>
-                <nav class="nav-container flex">
+                <nav class="nav-container">
                     <button
                         class="btn gallery-button"
                         onclick="setMode('gallery')"
@@ -113,41 +113,7 @@
                         </section>
                     </div>
 
-                    <div class="download-container">
-                        <a
-                            class="btn btn-download"
-                            onclick="onDownloadMeme(this)"
-                            download="my-meme.jpg"
-                        >
-                            Download
-                        </a>
-                    </div>
-
                     <form>
-                        <div class="font-pick">
-                            <label for="font-type" class="visually-hidden"
-                                >Select font</label
-                            >
-                            <select
-                                name="font-type"
-                                id="font-type"
-                                onchange="onChangeFont(this)"
-                            >
-                                <option value="" disabled>Select font</option>
-                                <option value="impact" selected>Impact</option>
-                                <option value="arial">Arial</option>
-                                <option value="verdana">Verdana</option>
-                                <option value="tahoma">Tahoma</option>
-                                <option value="times-new-roman">
-                                    Times New Roman
-                                </option>
-                                <option value="georgia">Georgia</option>
-                                <option value="courier-new">Courier New</option>
-                                <option value="trebuchet-ms">
-                                    Trebuchet MS
-                                </option>
-                            </select>
-                        </div>
                         <div class="color-section">
                             <div class="stroke-color">
                                 <input
@@ -180,6 +146,44 @@
                                     <i class="fa-solid fa-palette"></i>
                                 </label>
                             </div>
+                        </div>
+                        <div class="font-area">
+                            <div class="font-pick">
+                                <select
+                                    name="font-type"
+                                    id="font-type"
+                                    onchange="onChangeFont(this)"
+                                >
+                                    <option value="" disabled>
+                                        Select font
+                                    </option>
+                                    <option value="impact" selected>
+                                        Impact
+                                    </option>
+                                    <option value="arial">Arial</option>
+                                    <option value="verdana">Verdana</option>
+                                    <option value="tahoma">Tahoma</option>
+                                    <option value="times-new-roman">
+                                        Times New Roman
+                                    </option>
+                                    <option value="georgia">Georgia</option>
+                                    <option value="courier-new">
+                                        Courier New
+                                    </option>
+                                    <option value="trebuchet-ms">
+                                        Trebuchet MS
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="download-container">
+                            <a
+                                class="btn btn-download"
+                                onclick="onDownloadMeme(this)"
+                                download="my-meme.jpg"
+                            >
+                                Download
+                            </a>
                         </div>
                     </form>
                 </section>

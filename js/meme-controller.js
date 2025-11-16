@@ -25,7 +25,6 @@ function renderMeme(isExport = false) {
 function drawTextBoxes(isExport) {
     if (!gCtx || !gMeme) return
     const meme = getMeme()
-    console.log('meme:', meme)
     const selectedIdx = gMeme.selectedLineIdx
     gMeme.lines.forEach((line, idx) => {
         gCtx.save()
