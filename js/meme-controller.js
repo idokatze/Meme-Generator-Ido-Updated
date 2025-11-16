@@ -8,7 +8,6 @@ function renderCanvas() {
     gCtx = gElCanvas.getContext('2d')
     resizeCanvas()
 
-    // Attach resize listener only once
     window.addEventListener('resize', () => {
         resizeCanvas()
         renderMeme()
@@ -25,27 +24,35 @@ function renderMeme(isExport = false) {
 
 function drawTextBoxes(isExport) {
     if (!gCtx || !gMeme) return
+    const meme = getMeme()
+    console.log('meme:', meme)
     const selectedIdx = gMeme.selectedLineIdx
-
     gMeme.lines.forEach((line, idx) => {
-        const { text, size, color, outline, fontType, align, x, y, padding } =
-            line
-
         gCtx.save()
-        gCtx.font = `${size}px ${fontType}`
-        gCtx.textAlign = align
+        gCtx.font = `${line.size}px ${line.fontType}`
         gCtx.textBaseline = 'bottom'
 
-        const textWidth = gCtx.measureText(text).width
-        const boxWidth = textWidth + padding * 2
-        const boxHeight = size + padding * 2
+        ensureLineDefaults(
+            line,
+            idx,
+            gCtx,
+            gCtx.canvas.width,
+            gCtx.canvas.height
+        )
 
-        let boxX = x
-        if (align === 'center') boxX = x - boxWidth / 2
-        else if (align === 'right') boxX = x - boxWidth
-        const boxY = y - size - padding
+        const {
+            text,
+            size,
+            color,
+            outline,
+            x,
+            y,
+            boxX,
+            boxY,
+            boxWidth,
+            boxHeight,
+        } = line
 
-        // Outline only if editing, not exporting
         if (!isExport && idx === selectedIdx) {
             gCtx.strokeStyle = 'yellow'
             gCtx.lineWidth = 2
@@ -63,11 +70,15 @@ function drawTextBoxes(isExport) {
     })
 }
 
-function onDownloadMeme(elLink) {
+function onDownloadMeme(elBtn) {
     renderMeme(true)
     const dataUrl = gElCanvas.toDataURL('image/jpeg')
-    elLink.href = dataUrl
-    elLink.download = 'my-meme.jpeg'
+
+    const link = document.createElement('a')
+    link.href = dataUrl
+    link.download = 'my-meme.jpg'
+    link.click()
+
     renderMeme()
 }
 
@@ -122,11 +133,8 @@ function getEvPos(ev) {
     }
 
     if (TOUCH_EVS.includes(ev.type)) {
-        // Prevent triggering the mouse ev
         ev.preventDefault()
-        // Gets the first touch point
         ev = ev.changedTouches[0]
-        // Calc the right pos according to the touch screen
         pos = {
             x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
             y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
@@ -136,7 +144,6 @@ function getEvPos(ev) {
 }
 
 function onDown(ev) {
-    // Get the ev pos from mouse or touch
     const pos = getEvPos(ev)
     calcLineLocations()
     const meme = getMeme()
@@ -188,15 +195,11 @@ function calcLineLocations() {
 
     meme.lines.forEach((line) => {
         gCtx.font = `${line.size}px ${line.fontType}`
-        gCtx.textAlign = line.align
-        gCtx.textBaseline = 'bottom' // if this is how you draw the text
-        const textWidth = gCtx.measureText(line.text).width
-        console.log('line.x:', line.x)
+        gCtx.textBaseline = 'bottom'
 
-        let xCoord = line.x
-        if (line.align === 'center') xCoord = line.x - textWidth / 2
-        else if (line.align === 'right') xCoord = line.x - textWidth
-        console.log('textWidth:', textWidth)
+        const textWidth = gCtx.measureText(line.text).width
+
+        const xCoord = line.x
         const yCoord = line.y - line.size
 
         line.location = {
@@ -205,5 +208,30 @@ function calcLineLocations() {
             width: textWidth,
             height: line.size,
         }
+
+        line.boxWidth = textWidth + line.padding * 2
+        line.boxHeight = line.size + line.padding * 2
+        line.boxX = line.x - line.padding
+        line.boxY = line.y - line.size - line.padding
     })
+}
+
+function ensureLineDefaults(line, idx, ctx, canvasWidth, canvasHeight) {
+    ctx.font = `${line.size}px ${line.fontType}`
+    const textWidth = ctx.measureText(line.text).width
+
+    if (line.y == null) {
+        if (idx === 0) line.y = canvasHeight / 3
+        else if (idx === 1) line.y = (canvasHeight / 3) * 2
+        else line.y = canvasHeight / 2
+    }
+
+    if (line.x == null) {
+        line.x = canvasWidth / 2 - textWidth / 2
+    }
+
+    if (line.boxWidth == null) line.boxWidth = textWidth + line.padding * 2
+    if (line.boxHeight == null) line.boxHeight = line.size + line.padding * 2
+    if (line.boxX == null) line.boxX = line.x - line.padding
+    if (line.boxY == null) line.boxY = line.y - line.size - line.padding
 }

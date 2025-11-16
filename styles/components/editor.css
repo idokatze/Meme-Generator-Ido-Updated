@@ -16,7 +16,7 @@ form {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 .color-section > * {
     display: flex;
@@ -35,4 +35,18 @@ select {
 
 .download-container {
     display: inline;
+}
+
+a.btn {
+    padding: 0.4em 1em;
+    text-decoration: none;
+}
+
+.stroke-color::after {
+    background-color: yellow;
+    content: '';
+}
+
+.text-color {
+    appearance: none;
 }

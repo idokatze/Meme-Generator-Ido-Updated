@@ -1,4 +1,4 @@
-@media (min-width: 600px) {
+@media (min-width: 750px) {
     .main-layout {
         grid-template-columns:
             20px
@@ -47,6 +47,18 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
+    .main-container.hidden,
+    .editor-container.hidden,
+    .gallery-container.hidden {
+        display: none;
+    }
+
+    canvas {
+        max-width: 300; /* tablet */
+    }
+}
+
+@media (min-width: 950px) {
     canvas {
         max-width: 500px; /* tablet */
     }

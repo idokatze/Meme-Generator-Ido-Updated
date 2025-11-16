@@ -32,17 +32,19 @@
 
             <section class="gallery-container flex"></section>
             <main class="main-container grid">
-                <section class="canvas-container">
-                    <canvas
-                        class="canvas hidden"
-                        id="my-canvas"
-                        onmousedown="onDown(event)"
-                        onmouseup="onUp()"
-                        onmousemove="onMove(event)"
-                    >
-                    </canvas>
-                </section>
-                <section class="editor-container flex hidden">
+                <div class="canvas-grid-container">
+                    <section class="canvas-container">
+                        <canvas
+                            class="canvas"
+                            id="my-canvas"
+                            onmousedown="onDown(event)"
+                            onmouseup="onUp()"
+                            onmousemove="onMove(event)"
+                        >
+                        </canvas>
+                    </section>
+                </div>
+                <section class="editor-container flex">
                     <input
                         type="text"
                         data-trans="add-text-here"
@@ -64,16 +66,12 @@
                         <button class="btn remove-btn" onclick="onRemoveLine()">
                             <i class="fa-solid fa-trash"></i>
                         </button>
-
-                        <div class="download-container">
-                            <a
-                                class="btn btn-download"
-                                onclick="onDownloadMeme(this)"
-                                download="my-meme.jpg"
-                            >
-                                <i class="fa-solid fa-download"></i>
-                            </a>
-                        </div>
+                        <button
+                            class="btn btn-download"
+                            onclick="onDownloadMeme(this)"
+                        >
+                            <i class="fa-solid fa-download"></i>
+                        </button>
                     </div>
 
                     <div class="font-size">
@@ -151,27 +149,36 @@
                             </select>
                         </div>
                         <div class="color-section">
-                            <div class="stroke-container">
-                                <label for="stroke-color"
-                                    ><i class="fa-solid fa-paintbrush"></i
-                                ></label>
+                            <div class="stroke-color">
                                 <input
                                     id="stroke-color"
                                     type="color"
-                                    class="btn stroke-color"
-                                    oninput="onUpdateStrokeColor()"
+                                    oninput="onUpdateStrokeColor(this)"
+                                    style="display: none"
                                 />
+                                <label
+                                    for="stroke-color"
+                                    class="color-icon"
+                                    title="Text Border Color"
+                                >
+                                    <i class="fa-solid fa-paintbrush"></i>
+                                </label>
                             </div>
-                            <div class="fill-container">
-                                <label for="color"
-                                    ><i class="fa-solid fa-palette"></i
-                                ></label>
+
+                            <div class="text-color">
                                 <input
-                                    id="fill-color"
+                                    id="text-color"
                                     type="color"
-                                    class="btn fill-color"
                                     oninput="onUpdateFillColor(this)"
+                                    style="display: none"
                                 />
+                                <label
+                                    for="text-color"
+                                    class="color-icon"
+                                    title="Text Fill Color"
+                                >
+                                    <i class="fa-solid fa-palette"></i>
+                                </label>
                             </div>
                         </div>
                     </form>

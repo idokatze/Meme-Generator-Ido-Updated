@@ -8,14 +8,14 @@ function onAddTxt(elInput) {
 }
 
 function onUpdateStrokeColor(ev) {
-    const elStrokeColor = document.querySelector('.stroke-color').value
-    updateStrokeColor(elStrokeColor)
+    const strokeColor = ev.value
+    updateStrokeColor(strokeColor)
     renderMeme()
 }
 
 function onUpdateFillColor(ev) {
-    const elFillColor = document.querySelector('.fill-color').value
-    updateFillColor(elFillColor)
+    const fillColor = ev.value
+    updateFillColor(fillColor)
     renderMeme()
 }
 
@@ -36,7 +36,9 @@ function onSwitchFocus() {
 }
 
 function onChangeAlign(mode) {
-    changeAlign(mode)
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+    updateLineAlign(mode, ctx, canvas.width)
     renderMeme()
 }
 

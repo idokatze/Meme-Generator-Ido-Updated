@@ -12,13 +12,10 @@ var gMeme = {
         {
             text: 'Add Your Text',
             size: 30,
-            color: 'red',
+            color: 'white',
             outline: 'black',
             fontType: 'Impact',
             align: 'center',
-
-            x: 250,
-            y: 60,
             padding: 10,
         },
     ],
@@ -48,6 +45,9 @@ function setMode(mode, imgId = null) {
     switch (mode) {
         case 'gallery':
             elGallery.classList.remove('hidden')
+            elCanvas.classList.add('hidden')
+            elEditor.classList.add('hidden')
+            mainContainer.classList.add('hidden')
             break
 
         case 'editor':

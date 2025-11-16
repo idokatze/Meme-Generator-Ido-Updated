@@ -30,12 +30,10 @@ function addLine() {
     const newLine = {
         text: 'Add Your Text',
         fontType: 'Impact',
-        size: 30, // pixel size
-        color: 'red',
+        size: 30,
+        color: 'white',
         outline: 'black',
         align: 'center',
-        x: pos.x,
-        y: pos.y,
         padding: 10,
     }
 
@@ -43,11 +41,10 @@ function addLine() {
 }
 
 function setMemeImage(imgId) {
-    // Update meme state if a new id is passed
-    console.log('imgId:', imgId)
-    if (imgId) gMeme.selectedImgId = imgId
+    if (!imgId) return
 
     const meme = getMeme()
+    meme.selectedImgId = imgId
     gMemeImg = new Image()
     gMemeImg.src = `img/square-imgs/${meme.selectedImgId}.jpg`
 
@@ -85,7 +82,6 @@ function changeSize(delta) {
     const line = meme.lines[lineIdx]
     const newSize = line.size + delta
 
-    // Optional: limit the minimum and maximum size
     if (newSize >= 5 && newSize <= 40) {
         line.size = newSize
     }
@@ -102,11 +98,27 @@ function switchFocus() {
     }
 }
 
-function changeAlign(mode) {
+function updateLineAlign(mode, ctx, canvasWidth) {
     const meme = getMeme()
-    const idx = meme.selectedLineIdx
+    const line = meme.lines[meme.selectedLineIdx]
 
-    meme.lines[idx].align = mode
+    ctx.font = `${line.size}px ${line.fontType}`
+    const textWidth = ctx.measureText(line.text).width
+    const boxWidth = textWidth + line.padding * 2
+    const margin = 20
+
+    if (mode === 'left') {
+        line.x = margin + line.padding
+        line.boxX = margin
+    } else if (mode === 'center') {
+        line.x = canvasWidth / 2 - textWidth / 2
+        line.boxX = (canvasWidth - boxWidth) / 2
+    } else if (mode === 'right') {
+        line.x = canvasWidth - margin - textWidth - line.padding
+        line.boxX = canvasWidth - boxWidth - margin
+    }
+
+    line.align = mode
 }
 
 function removeLine() {

@@ -1,6 +1,5 @@
 'use strict'
 
-// Array of available images
 let gImgs = [
     { id: 1, url: 'img/square-imgs/1.jpg', keywords: ['funny', 'cat'] },
     { id: 2, url: 'img/square-imgs/2.jpg', keywords: ['dog', 'cute'] },
